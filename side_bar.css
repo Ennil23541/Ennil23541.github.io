@@ -1,0 +1,6 @@
+.sidebar{
+    height: 1fr;
+    
+    background-color: rgb(0, 0, 80);
+    display: inline-block;
+}

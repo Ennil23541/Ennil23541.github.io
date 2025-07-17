@@ -1,0 +1,8 @@
+
+
+.home_page_web_body{
+    
+    width: 1fr;
+    display: grid;
+    grid-template-columns: 300px 1fr; /* The side bar and the scrollable main body*/
+}

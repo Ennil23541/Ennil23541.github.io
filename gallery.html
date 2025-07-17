@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Website of Yan Ting Leung</title>
+        <link rel="stylesheet" href="header_bar.css">
+        <link rel="stylesheet" href="header_bar_buttons.css">
+        <link rel="stylesheet" href="header_bar_logofeature.css">
+        <link rel="stylesheet" href="body_overview.css">
+        <link rel="stylesheet" href="side_bar.css">
+        <link rel="icon" href="/images/favicon.png">
+        <script src="header_bar_buttons.js"></script>
+        <script src="body_buttons.js"></script>
+        <script src="gallery_box.js"></script>
+    </head>
+    <body>
+        
+        <div class="js-headerbar_expand"></div>
+                
+        <div class="home_page_web_body">
+            <div class="sidebar">
+            <p>Insert links here</p>   
+            </div>
+                <div class="gallery_body_text">
+                    <div class="body_overview">
+                        <div class="body_text_paragraph">
+                            <p style="font-size: 50px; margin-top: 15px;">My Drawings</p>
+                            <p>At first I was drawing for Lucy, a friend of mine, in exchange for McDonald's apple pies. 
+                                Because of that I started to learn drawing and look for chances to get paid or have practices.
+                                Then I discover <a href="https://the-peak.ca/">The Peak</a> and became their freelancing illustrator since then.
+                                Here are some of the pictures I drew for them.
+                            </p>
+                            
+                        </div>
+                        <img src="peak_img/Lucy_oc.png" style="object-fit: scale-down; height: 350px; margin-left: 100px; margin-top: 25px;">
+                    </div>
+
+                    <div class="gallery_button_slot">
+                            <button class="gallery_button js-24_fall" onclick="renderPictures('fall_2024')">2024 Fall</button>
+                            <button class="gallery_button js-25_spring" onclick="renderPictures('spring_2025')">2025 Spring</button>
+                            <button class="gallery_button js-others" onclick="renderPictures('others')">Others</button>
+                    </div>
+                    
+                    <div class="gallery_grids js-gallery_grids"></div>
+                    
+                
+
+                </div>
+                    
+            </div>
+        </div>
+
+        <script>
+            renderHeaderBar("The Drawing Zone");
+        </script>
+
+        <script>
+            renderPictures('fall_2024');
+        </script>
+
+    </body>
+</html>

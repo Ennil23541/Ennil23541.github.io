@@ -1,0 +1,21 @@
+.logofeatures{
+    display: grid;
+    background-color: brown;
+    grid-template-columns: 300px 1fr;
+}
+
+.logo_box{
+    background-color: white;
+}
+
+.logo{
+    margin-left: 100px;
+    object-fit:fill;
+    height: 125px;
+    width: 125px;
+    display: inline-flex;
+}
+
+.features{
+    background-color: rgb(0,0,80);
+}

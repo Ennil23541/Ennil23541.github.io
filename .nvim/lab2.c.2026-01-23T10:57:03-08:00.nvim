@@ -1,0 +1,27 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  char *command = NULL;
+  size_t length = 0;
+
+  printf("Enter program to run:\n>");
+
+  getline(&command, &length, stdin);
+
+  while (1) {
+
+    if (fork() == 0) {
+      printf("This is a child and the pid is:%d\n", getpid());
+      printf("Will execute: %s\n", command);
+      break;
+    } else {
+      sleep(1);
+      printf("Enter program to run:\n>");
+
+      getline(&command, &length, stdin);
+    }
+  }
+}

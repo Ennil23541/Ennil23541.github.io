@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  printf("Enter program to run:\n>");
+  fork();
+
+  if (fork() == 0) {
+    printf("This is a child and the pid is:%d\n", getpid());
+  } else {
+    printf("This is the parent and the pid is:%d\n", getpid());
+  }
+}

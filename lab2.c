@@ -1,0 +1,33 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  char *command = NULL;
+  size_t length = 0;
+
+  printf("Enter program to run:\n>");
+
+  ssize_t len = getline(&command, &length, stdin);
+
+  command[len - 1] = '\0';
+
+  while (1) {
+    int pid = fork();
+    if (pid != 0) {
+      waitpid(pid, NULL, 0);
+      printf("Enter program to run:\n>");
+
+      len = getline(&command, &length, stdin);
+
+      command[len - 1] = '\0';
+    } else {
+      if (execl(command, command, NULL) == -1) {
+        printf("Execl error\n");
+      }
+      break;
+    }
+  }
+}

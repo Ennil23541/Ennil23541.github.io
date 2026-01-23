@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  printf("Enter program to run:\n>");
+  fork();
+
+  if (getppid() == 0) {
+    printf("This is a child\n");
+  } else {
+    printf("This is the parent\n");
+  }
+}

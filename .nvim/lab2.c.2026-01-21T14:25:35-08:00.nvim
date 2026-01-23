@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  while(1){
+
+    printf("Enter program to run:\n>");
+    char *command = NULL;
+    scanf("%s",command);
+
+    if (fork() == 0) {
+      printf("This is a child and the pid is:%d\n", getpid());
+      printf("Will execute: %s\n", command);
+    } else {
+      printf("This is the parent and the pid is:%d\n", getpid());
+    }
+  }
+}

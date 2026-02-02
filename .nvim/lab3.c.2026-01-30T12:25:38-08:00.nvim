@@ -1,0 +1,53 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void print(int index, char **line_array);
+
+int main() {
+  char *recent_lines[5];
+  char *line = NULL;
+  int index = 0;
+  int length = 0;
+
+  while (1) {
+    printf("Enter a line: ");
+    ssize_t number_of_characters = getline(&line, &length, stdin);
+
+    line[number_of_characters - 1] = '\0';
+    recent_lines[index] = line;
+    printf("%s,%d\n", recent_lines[index],index);
+    
+    // if (strcmp(recent_lines[index], "") == 0) {
+    //
+
+    //}
+
+    if (strcmp(recent_lines[index], "print") == 0) {
+      print(index, recent_lines);
+    }
+
+    if (index == 4) {
+      index = 0;
+    } else {
+      index++;
+    }
+  }
+  return 0;
+}
+
+void print(int index, char **line_array) {
+  for (int i = 0; i < 4; i++) {
+    if (line_array[index] != NULL) {
+      printf("%s..%d\n", line_array[index],index);
+    }
+    index++;
+
+    if (index == 4) {
+      index = 0;
+    } else {
+      index++;
+    }
+  }
+}

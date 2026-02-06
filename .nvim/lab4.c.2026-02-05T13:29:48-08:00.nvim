@@ -1,0 +1,40 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+void increase_heap_size(int extra_size);
+void init_block(struct header *block_pointer);
+void print_out();
+
+int main() {
+  void* current_break = sbrk(0);
+  printf("the current program break location is: %p\n",current_break);
+
+  struct header first_block;
+  first_block.size = 128;
+  first_block.next = NULL;
+
+  struct header second_block;
+  second_block.size = 128;
+  second_block.next = NULL;
+
+  increase_heap_size(256);
+  init_block(&first_block);
+  init_block(&second_block);
+
+  print_out();
+
+  return 0;
+}
+
+void increase_heap_size(int extra_size) {}
+
+void init_block(struct header *block_pointer) {}
+
+void print_out() { printf("print all bytes here."); }

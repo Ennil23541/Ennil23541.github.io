@@ -1,0 +1,46 @@
+#define _ISOC99_SOURCE
+#define _DEFAULT_SOURCE
+#include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+void *increase_heap_size(int extra_size);
+void init_block(struct header *block_pointer);
+void print_out();
+
+int main() {
+  void *current_break = sbrk(0);
+  printf("the current program break location is: %p\n", current_break);
+
+  void *new_break = increase_heap_size(256);
+
+  struct header *first_block = (struct header *)current_break;
+  first_block->size = 128;
+  first_block->next = NULL;
+  printf("Now the first header is at: %p\n", first_block);
+
+  struct header second_block;
+  second_block.size = 128;
+  second_block.next = NULL;
+
+  init_block(first_block);
+  init_block(&second_block);
+
+  print_out();
+
+  return 0;
+}
+
+void *increase_heap_size(int extra_size) {
+  void *new_break = sbrk(extra_size);
+  return new_break;
+}
+
+void init_block(struct header *block_pointer) {}
+
+void print_out() { printf("print all bytes here.\n"); }

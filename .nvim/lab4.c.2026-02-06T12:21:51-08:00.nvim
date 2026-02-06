@@ -1,0 +1,59 @@
+#define _ISOC99_SOURCE
+#define _DEFAULT_SOURCE
+#include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
+
+#define HEAP_SIZE 256
+#define BLOCK_SIZE 128
+#define BUFFER_SIZE 64
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+void init_block(struct header *block_pointer, uint64_t size,
+                struct header *next, char init_char);
+void print_out(char *start);
+
+int main() {
+  char *current_break = sbrk(0);
+  printf("the current program break location is: %p\n", current_break);
+
+  sbrk(HEAP_SIZE);
+
+  struct header *first_block = (struct header *)current_break;
+  first_block->size = 128;
+  first_block->next = NULL;
+  printf("Now the first header is at: %p\n", first_block);
+
+  struct header *second_block = (struct header *)(current_break + BLOCK_SIZE);
+  second_block->size = 128;
+  second_block->next = first_block;
+  printf("Now the second header is at: %p\n", second_block);
+
+  init_block(first_block, BLOCK_SIZE, first_block->next, '0');
+  init_block(second_block, BLOCK_SIZE, second_block->next, '1');
+
+  print_out(current_break);
+
+  return 0;
+}
+
+void init_block(struct header *block_pointer, uint64_t size,
+                struct header *next, char init_char) {
+  for (int i = sizeof(struct header); i < size; i++) {
+    // char* address = (block_pointer + sizeof(struct header));
+
+    //*(block_pointer + i) = init_char;
+    // memset(,init_char,block_pointer)
+  }
+}
+
+void print_out(char *start) {
+  printf("print all bytes here.\n");
+  for (int i = 0; i < HEAP_SIZE; i++) {
+    printf("%c\n", *(start + sizeof(struct header) + i));
+  }
+}

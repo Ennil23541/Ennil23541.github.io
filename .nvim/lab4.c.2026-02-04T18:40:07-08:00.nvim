@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<stdint.h>
+
+struct header{
+  uint64_t size;
+  struct header* next;
+};
+
+void increase_heap_size(int extra_size);
+void init_block(struct header* block_pointer);
+void print_out();
+
+int main(){
+  struct header first_block;
+  first_block.size = 128;
+  first_block.next = NULL;
+
+  struct header second_block;
+  second_block.size = 128;
+  second_block.next = NULL;
+
+  increase_heap_size(256);
+  init_block(&first_block);
+
+  return 0;
+}
+
+void increase_heap_size(int extra_size){}
+
+void init_block(struct header* block_pointer){}
+
+void print_out(){
+  printf("print all bytes here.");
+}

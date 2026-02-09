@@ -20,6 +20,8 @@ void print_out(char *start);
 
 int main() {
   char *current_break = sbrk(0);
+  printf("the current program break location is: %p\n", current_break);
+
   sbrk(HEAP_SIZE);
 
   struct header *first_block = (struct header *)current_break;
@@ -33,12 +35,13 @@ int main() {
   init_block(first_block, BLOCK_SIZE, first_block->next, '0');
   init_block(second_block, BLOCK_SIZE, second_block->next, '1');
 
-  printf("first block:\t%p\n", first_block);
-  printf("second block:\t%p\n", second_block);
-  printf("first block size:\t%lu\n", first_block->size);
-  printf("first block next:\t%p\n", first_block->next);
-  printf("second block size:\t%lu\n", second_block->size);
-  printf("second block next:\t%p\n", second_block->next);
+
+  printf("first block:\t%p\n",first_block);
+  printf("second block:\t%p\n",second_block);
+  printf("first block size:\t%lu\n",first_block->size);
+  printf("first block next:\t%p\n",first_block->next);
+  printf("second block size:\t%lu\n",second_block->size);
+  printf("second block next:\t%p\n",second_block->next);
   print_out(current_break);
   return 0;
 }
@@ -54,6 +57,7 @@ void init_block(struct header *block_pointer, uint64_t size,
 }
 
 void print_out(char *start) {
+  printf("print all bytes here.\n");
   for (int i = 0; i < HEAP_SIZE; i++) {
     if (i % 128 > sizeof(struct header)) {
       printf("%c\n", *(start + i));

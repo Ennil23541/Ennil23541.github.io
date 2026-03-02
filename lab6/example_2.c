@@ -15,6 +15,8 @@
     if (!(expr)) {                                                             \
       fprintf(stderr, "Test failed: %s\n", #expr);                             \
       exit(1);                                                                 \
+    } else {                                                                   \
+      printf("Test successful: %s\n", #expr);                                  \
     }                                                                          \
   }
 
@@ -53,10 +55,10 @@ void insert_sorted(uint64_t data) {
       curr = curr->next;
     }
 
-    prev->next = new_node;
     if (curr != NULL) {
-      new_node->next = curr->next;
+      new_node->next = curr;
     }
+    prev->next = new_node;
   }
 
   info.sum += data;
@@ -78,6 +80,19 @@ int index_of(uint64_t data) {
   return -1;
 }
 
+int sum_of_all() {
+  node_t *current = head;
+  int sum = 0;
+  while (current != NULL) {
+    sum += current->data;
+    printf("Adding %lu\n", current->data);
+    current = current->next;
+  }
+
+  printf("Total: %d\n", sum);
+  return sum;
+}
+
 int main() {
   insert_sorted(1);
   insert_sorted(3);
@@ -86,6 +101,8 @@ int main() {
 
   TEST(info.sum == 1 + 3 + 5 + 2);
   TEST(index_of(2) == 1);
+
+  ASSERT(info.sum == sum_of_all());
 
   return 0;
 }

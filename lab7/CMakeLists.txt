@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.22)
+
+project(
+  CMakeExcercise
+  VERSION 1.0
+  DESCRIPTION "This is an example for the lab."
+  LANGUAGES C)
+
+add_executable(lab7 lab7.c)
